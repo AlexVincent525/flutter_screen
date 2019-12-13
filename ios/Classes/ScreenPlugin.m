@@ -18,6 +18,10 @@
     [[UIScreen mainScreen] setBrightness:brightness.floatValue];
     result(nil);
   }
+  else if ([@"resetBrightness" isEqualToString:call.method]) {
+    [[UIScreen mainScreen] setBrightness:nil];
+    result(nil);
+  }
   else if ([@"isKeptOn" isEqualToString:call.method]) {
     bool isIdleTimerDisabled =  [[UIApplication sharedApplication] isIdleTimerDisabled];
     result([NSNumber numberWithBool:isIdleTimerDisabled]);
@@ -25,6 +29,7 @@
   else if ([@"keepOn" isEqualToString:call.method]) {
     NSNumber *b = call.arguments[@"on"];
     [[UIApplication sharedApplication] setIdleTimerDisabled:b.boolValue];
+    result(nil);
   }
   else {
     result(FlutterMethodNotImplemented);
